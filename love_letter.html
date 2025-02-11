@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Love Letter 💌</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: pink;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .heart-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: red;
+            animation: floatUp 3s ease-in-out infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        #proposal {
+            display: none;
+            font-size: 22px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            max-height: 60vh;  /* Ensures the letter does not exceed screen size */
+            overflow-y: auto;   /* Allows scrolling if the text is too long */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        button {
+            margin: 10px;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+
+        .emoji {
+            font-size: 60px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="emoji">💌</span>
+        <div id="buttons">
+            <button onclick="openLetter()">Open</button>
+            <button onclick="closeLetter()">Wrap Up</button>
+        </div>
+        <div id="proposal">
+            <h2>❤️ Meri Jaan ❤️</h2>
+            <p>
+                🌸 Tum meri zindagi ka woh hissa ho,<br>
+                jisme sirf pyar, muskurahat aur khushboo hai...<br><br>
+
+                ❤️ Jab bhi tumhare saath hota hoon,<br>
+                lagta hai jaise duniya ruk gayi ho.<br>
+                Tumhari hasi meri duniya roshan kar deti hai.<br><br>
+                
+                **Aur ab ek baat dil se kehna chahta hoon...**<br><br>
+            </p>
+
+            <p>
+                ✨ Tere bina adhura sa lagta hai yeh jahaan,<br>
+                Jaise chand ke bina adhoori ho ek raat suhaan.<br><br>
+
+                🌹 Tu jo paas ho toh mehke har ek ehsaas,<br>
+                Teri baatein, tera saath – sab lage kuch khaas.<br><br>
+
+                💖 Zindagi bhar ka safar tujhe saath le chalna hai,<br>
+                Bas ek sawaal hai... **Kya tu hamesha meri rahegi?** ❤️  
+            </p>
+        </div>
+    </div>
+
+    <div class="heart-container" id="heartContainer"></div>
+
+    <script>
+        function openLetter() {
+            document.getElementById("proposal").style.display = "block";
+            createHearts();
+        }
+
+        function closeLetter() {
+            document.getElementById("proposal").style.display = "none";
+            document.getElementById("heartContainer").innerHTML = "";
+        }
+
+        function createHearts() {
+            let container = document.getElementById("heartContainer");
+            container.innerHTML = "";
+            
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.innerHTML = "❤️";
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+
+</body>
+</html>
